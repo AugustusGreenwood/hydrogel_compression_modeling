@@ -1,6 +1,3 @@
-# I am getting very weird errors if i try to use scanf with r, id, x, y, z so I changed
-# it to be r, id, s where s is the string of positions and then I split and parse that string
-# it's probably better to do r, id, x, y, z so maybe change that if the errors are fixed
 function __parse_feb_file_node_position_line(line::String)::Tuple{Int64, Vector{Float64}}
     r, id, s = @scanf(line, "\t\t\t<node id=\"%i\">%[^<]s</node>\n", Int64, String)
     pos = parse.(Float64, split(s, ','))
@@ -135,4 +132,8 @@ function getFEBioDataAtIndex(data_file::String, index::Int64)
     end
     return out
 end
+
+
+
+
 

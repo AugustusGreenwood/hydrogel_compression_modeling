@@ -1,5 +1,4 @@
-
-
+global const EOC_INDEX::Int64, EOC_TIME::Float64, EOR_INDEX::Int64, EOR_TIME::Float64 = __get_eoc_eor_locations()::Tuple{Int64, Float64, Int64, Float64}
 
 function __get_eoc_eor_locations()::Tuple{Int64, Float64, Int64, Float64}
     file = open("locations.dat", "r")
@@ -10,10 +9,6 @@ function __get_eoc_eor_locations()::Tuple{Int64, Float64, Int64, Float64}
 
     return eoc_indx, eoc_time, eor_indx, eor_time
 end
-
-global const EOC_INDEX::Int64, EOC_TIME::Float64, EOR_INDEX::Int64, EOR_TIME::Float64 = __get_eoc_eor_locations()::Tuple{Int64, Float64, Int64, Float64}
-
-
 
 function __get_r_h(feb_file::String)
     node_loc = getFEBioNodePositions(feb_file)

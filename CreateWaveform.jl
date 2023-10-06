@@ -1,5 +1,3 @@
-
-
 function __create_cycle(t0, y0, A, ramp, dwell)
     return [t0+ramp y0+A; 
             t0+ramp+dwell y0+A;

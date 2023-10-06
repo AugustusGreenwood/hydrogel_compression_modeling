@@ -149,10 +149,6 @@ function getCenterStatistics(SOM::SelfOrganizingMap, data::AbstractMatrix)
 end
 
 
-functio
-
-
-
 function getBars(SOM::SelfOrganizingMap)
 
 end
