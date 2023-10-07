@@ -8,8 +8,21 @@ using CSV
 using Clustering
 
 
-include("./FEBioInteract.jl")
-include("./DataAnalysis.jl")
-include("./CreateWaveform.jl")
-include("./SOM.jl")
+
+module FEBioInteract
+export getNodePositions, getElementConnectivity, getElementCenterOfMass, getData, getDataAtIndex, getAllDataAtIndex
+    include("./FEBioInteract.jl")
+end
+
+module DataAnalysis
+    include("./DataAnalysis.jl")
+end
+
+module Waveform
+    include("./CreateWaveform.jl")
+end
+
+module Clustering
+    include("./Clustering.jl")
+end
 
