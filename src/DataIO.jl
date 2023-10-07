@@ -42,8 +42,10 @@ function outputAllData(dir::String, feb_file::String)
     end
 end
 
+
 function scaleData(data::AbstractVector{Float64})
     min, max = minimum(data), maximum(data)
+
     return @. 2 * (data - min) / (max - min) - 1
 end
 
@@ -56,130 +58,15 @@ function scaleData(data::AbstractMatrix{Float64})
 end
 
 
-function assignData(result::KmeansResult, data::AbstractMatrix{Float64})
-    num = maximum(result.assignments)
 
-    out = Vector{Matrix{Float64}}(undef, num)
-    for i in 1:num
-        out[i] = data[:,result.assignments.==i]
-    end
-    return out
+
+
+function __dict_to_mat(data::Dict)
+    return reduce(vcat, values(data))
 end
 
-
-function plotData(result::KmeansResult, data::AbstractMatrix{Float64})
-    out = assignData(result, data)
-
-    if size(data, 1) == 3 
-        plt = scatter(size=(900,700))
-        for (i, set) in enumerate(out)
-            scatter!(set[1,:], set[2,:], set[3,:], label="cluster $i")
-            scatter!([result.centers[1,i]], [result.centers[2,i]], [result.centers[3,i]], color=plt.series_list[end][:linecolor], label="center $i", markersize=20, markeralpha=0.5)
-        end
-        display(plt)
-    else
-        plt = scatter(size=(900,700))
-        for (i, set) in enumerate(out)
-            scatter!(set[1,:], set[2,:], label="cluster $i")
-            scatter!([result.centers[1,i]], [result.centers[2,i]], color=plt.series_list[end][:linecolor], label="center $i", markersize=20, markeralpha=0.5)
-        end
-        display(plt)
-    end
-    return plt
-end
-
-
-
-function plotData(result::KmeansResult, indices::AbstractVector, data::AbstractMatrix{Float64})
-    out = assignData(result, data[3:end, :])
-    labels = ["pressure", "strain 1st invariant", "strain 2nd invariant", "strain 3rd invariant", "fluid flux magnitude"]
-
-    plt = scatter(size=(900,700))
-    for (i, set) in enumerate(out)
-        data_to_plot = set[indices, :]
-        center_to_plot =  result.centers[indices, i]
-        scatter!(data_to_plot[1,:], data_to_plot[2,:], data_to_plot[3,:])
-        scatter!(center_to_plot[1,:], center_to_plot[2,:], center_to_plot[3,:], markersize=15, markeralpha=0.5, color=plt.series_list[end][:linecolor]) 
-        xlabel!(labels[indices[1]])
-        ylabel!(labels[indices[2]])
-        zlabel!(labels[indices[3]])
-    end
-    display(plt)
-    return plt
-end
-
-function getDistanceMatrix(mat)
-    n = size(mat)[2]
-    distance_matrix = zeros(Float64, n, n) 
-    for (i, wi) in enumerate(eachcol(mat))
-        for (j, wj) in enumerate(eachcol(mat))
-            if j > i
-                distance = sqrt(sum((wi .- wj).^2))
-                distance_matrix[j,i] = distance_matrix[i,j] = distance
-            end
-        end
-    end
-    
-    return distance_matrix / maximum(distance_matrix)
-end
-
-
-function getSimilarMatrix(mat::AbstractMatrix, dim::Int64)
-    n,d = size(mat)
-
-    out = Matrix{Float64}(undef, n, dim)
-    for (i, row) in enumerate(eachrow(mat))
-        out[i, :] = rand(minimum(row):1e-15:maximum(row), dim)
-    end
-    return out
-end
-
-
-function getHopkinsStatistic(X::AbstractMatrix{Float64}, m::Int64)
-    d,n = size(X)
-    X_tilde = X[:, randperm(n)[1:m]]
-    Y = getSimilarMatrix(X, m)
-    temp = Vector{Float64}(undef, n)
-
-    ui = Vector{Float64}(undef, m)
-    for (i, Yi) in enumerate(eachcol(Y))
-        for (j, Xi) in enumerate(eachcol(X))
-            temp[j] = sqrt(sum( (Yi .- Xi).^2))
-        end
-        ui[i] = minimum(temp)
-    end
-
-    wi = Vector{Float64}(undef, m)
-    for (i, Xi) in enumerate(eachcol(X_tilde))
-        for (j, Xj) in enumerate(eachcol(X))
-            if Xi != Xj
-                temp[j] = sqrt(sum( (Xi .- Xj).^2 ))
-            end
-        end
-        wi[i] = minimum(temp)
-    end
-
-   u, w = sum(ui), sum(wi)
-
-    return u / (u + w)
-end
-
-
-function getAverageHopkinsStatistic(X::AbstractMatrix{Float64})
-    d,n = size(X)
-
-    H_avg = Vector{Float64}(undef, n - 2)
-    Threads.@threads for c in 2:n-1
-        H_avg[c-1] = getHopkinsStatistic(X, c)
-    end
-    return sum(H_avg) / length(H_avg)
-end
-
-function getAllData(path::String, index::Int64)
-    data_files = [file for file in readdir(path, join=true) if endswith(file, ".dat")]
-    data_files = data_files[[7,2,3,4,5,6,1]]
-    vec_data = getDataAtIndex.(data_files, index)
-    return reduce(hcat, vec_data)'
+function __dict_to_mat_sort(data::Dict)
+    return sortslices(reduce(vcat, values(data)), dims=1)
 end
 
 

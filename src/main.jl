@@ -1,28 +1,27 @@
-using Plots; plotlyjs()
-using Random
-using Scanf
-using DataFrames
-using DelimitedFiles
-using Statistics
-using CSV
-using Clustering
 
 
 
-module FEBioInteract
-export getNodePositions, getElementConnectivity, getElementCenterOfMass, getData, getDataAtIndex, getAllDataAtIndex
-    include("./FEBioInteract.jl")
+module DataInteract
+    using Scanf, DataFrames, CSV, Statistics
+    export getNodePositions, getElementConnectivity, getElementCenterOfMass, getData, getDataAtIndex, getAllDataAtIndex, scaleData
+    include("FEBioInteract.jl")
+    include("DataIO.jl")
 end
 
-module DataAnalysis
-    include("./DataAnalysis.jl")
+module KMeans
+    using Statistics, Plots, ..DataInteract
+    plotlyjs()
+    export getCenterStatistics, assignData, plotKMeans
+    include("KMeans.jl")
+end
+
+module SelfOrganizingMaps
+    using Statistics, Plots, Random, ..DataInteract
+    plotlyjs()
+    export getCenterMeanStd, splitDataByAssignment, plotSOM, train!, SelfOrganizingMap
+    include("SOM.jl")
 end
 
 module Waveform
     include("./CreateWaveform.jl")
 end
-
-module Clustering
-    include("./Clustering.jl")
-end
-

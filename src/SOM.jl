@@ -1,3 +1,6 @@
+
+
+
 mutable struct SelfOrganizingMap
     data::Matrix{Float64}
     weights::Matrix{Float64}
@@ -6,7 +9,7 @@ mutable struct SelfOrganizingMap
     h₀::Function
     σ::Function
     function SelfOrganizingMap(data::AbstractMatrix{Float64}, n::Int64, h₀::R, σ::S) where {R<:Function, S<:Function}
-        data = __scaleData(data)
+        data = scaleData(data)
         weights = __generateWeights(data, n)
         coords = __generateCoordinates(n)
         assignments = Vector{Int64}(undef, size(data, 2))
@@ -109,5 +112,38 @@ function __getAssignments!(SOM::SelfOrganizingMap)
         SOM.assignments[i] = __getBestMatchingUnitIndex(SOM, point)
     end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

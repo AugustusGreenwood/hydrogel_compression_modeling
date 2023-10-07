@@ -74,7 +74,6 @@ function getDataAtIndex(data_file::String, index::Int64)
     return out
 end
 
-
 function getAllDataAtIndex(root::String, index::Int64)
     data_files = data_files = [file for file in readdir("$root/", join=true) if endswith(file, ".dat")]
     data_files = data_files[[7,2,3,4,5,6,1]]
@@ -82,9 +81,6 @@ function getAllDataAtIndex(root::String, index::Int64)
     data = reduce(hcat, vec_data)'
     return data
 end
-
-
-
 
 function __parse_feb_file_node_position_line(line::String)::Tuple{Int64, Vector{Float64}}
     r, id, s = @scanf(line, "\t\t\t<node id=\"%i\">%[^<]s</node>\n", Int64, String)
@@ -95,7 +91,7 @@ function __parse_feb_file_node_position_line(line::String)::Tuple{Int64, Vector{
     elseif length(pos) != 3
         display("Something went wrong! $pos has incorrect dimentions")
     end
-    
+
     return id, pos
 end
 
@@ -133,8 +129,7 @@ function __parse_feb_file_element_connectivity_section(file::IOStream)
             break
         end
 
-        id, connectivity_vec = __parse_feb_file_element_connectivity_line(line)
-        id_connectivity_dict[id] = connectivity_vec
+        id, id_connectivity_dict[id] = __parse_feb_file_element_connectivity_line(line)
     end
     return id_connectivity_dict
 end
@@ -142,8 +137,4 @@ end
 function __dataframe_to_dict(dataframe::DataFrame)
     return Dict([parse(Int64, col[2:end]) => dataframe[!, Symbol(col)] for col in names(dataframe)]) 
 end
-
-
-
-
 
