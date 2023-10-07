@@ -1,6 +1,3 @@
-
-
-
 mutable struct SelfOrganizingMap
     data::Matrix{Float64}
     weights::Matrix{Float64}
@@ -112,38 +109,5 @@ function __getAssignments!(SOM::SelfOrganizingMap)
         SOM.assignments[i] = __getBestMatchingUnitIndex(SOM, point)
     end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
