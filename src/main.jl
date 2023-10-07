@@ -17,8 +17,9 @@ end
 
 module SelfOrganizingMaps
     using Statistics, Plots, Random, ..DataInteract
+    using Clustering: kmeans
     plotlyjs()
-    export getCenterMeanStd, splitDataByAssignment, plotSOM, train!, SelfOrganizingMap
+    export getCenterMeanStd, splitDataByAssignment, plotSOM, train!, SelfOrganizingMap, getKMeansCenters
     include("SOM.jl")
 end
 

@@ -12,10 +12,8 @@ mutable struct SelfOrganizingMap
         assignments = Vector{Int64}(undef, size(data, 2))
         return new(data, weights, coords, assignments, h₀, σ)
     end
-    function SelfOrganizingMap(data::Matrix{Float64}, weights::Matrix{Float64}, coords::Matrix{Float64}, assignments::Vector{Float64}, h₀::R, σ::S) where {R<:Function, S<:Function}
-        return new(data, weights, coords, h₀, σ)
-    end
 end
+
 
 function train!(SOM, itrs::Int64)
     Threads.@threads for i in 1:itrs
@@ -65,6 +63,12 @@ function getCenterMeanStd(SOM::SelfOrganizingMap, data::AbstractMatrix)
     end
     return mean_std
 end
+
+function getKMeansCenters(data::AbstractMatrix, n::Int64)
+    result = kmeans(data[3:end,:], n; tol=1e-30)
+    return result.centers
+end
+
 
 function __gaussian(ri::Vector{Float64}, r0::Vector{Float64}, σ::Float64)
     return exp(-sqrt(sum((ri .- r0).^2)) / (2*σ^2))
