@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<febio_spec version="4.0">
+	<Module type="biphasic"/>
+	<Control>
+		<analysis>TRANSIENT</analysis>
+		<time_steps>30</time_steps>
+		<step_size>1</step_size>
+		<plot_zero_state>0</plot_zero_state>
+		<plot_range>0,-1</plot_range>
+		<plot_level>PLOT_MAJOR_ITRS</plot_level>
+		<output_level>OUTPUT_MAJOR_ITRS</output_level>
+		<plot_stride>1</plot_stride>
+		<adaptor_re_solve>1</adaptor_re_solve>
+		<time_stepper type="default">
+			<max_retries>5</max_retries>
+			<opt_iter>11</opt_iter>
+			<dtmin>0</dtmin>
+			<dtmax lc="2">0.1</dtmax>
+			<aggressiveness>0</aggressiveness>
+			<cutback>0.5</cutback>
+			<dtforce>0</dtforce>
+		</time_stepper>
+		<solver type="biphasic">
+			<symmetric_stiffness>non-symmetric</symmetric_stiffness>
+			<equation_scheme>staggered</equation_scheme>
+			<equation_order>default</equation_order>
+			<optimize_bw>0</optimize_bw>
+			<lstol>0.9</lstol>
+			<lsmin>0.01</lsmin>
+			<lsiter>5</lsiter>
+			<max_refs>50</max_refs>
+			<check_zero_diagonal>0</check_zero_diagonal>
+			<zero_diagonal_tol>0</zero_diagonal_tol>
+			<force_partition>0</force_partition>
+			<reform_each_time_step>1</reform_each_time_step>
+			<reform_augment>0</reform_augment>
+			<diverge_reform>1</diverge_reform>
+			<min_residual>1e-20</min_residual>
+			<max_residual>0</max_residual>
+			<dtol>0.001</dtol>
+			<etol>0.01</etol>
+			<rtol>0</rtol>
+			<rhoi>-2</rhoi>
+			<alpha>1</alpha>
+			<beta>0.25</beta>
+			<gamma>0.5</gamma>
+			<logSolve>0</logSolve>
+			<arc_length>0</arc_length>
+			<arc_length_scale>0</arc_length_scale>
+			<ptol>0.01</ptol>
+			<mixed_formulation>0</mixed_formulation>
+			<qn_method type="Broyden">
+				<max_ups>50</max_ups>
+				<max_buffer_size>0</max_buffer_size>
+				<cycle_buffer>1</cycle_buffer>
+				<cmax>100000</cmax>
+			</qn_method>
+		</solver>
+	</Control>
+	<Globals>
+		<Constants>
+			<T>0</T>
+			<P>0</P>
+			<R>8.31446</R>
+			<Fc>96485.3</Fc>
+		</Constants>
+	</Globals>
+	<Material>
+		<material id="1" name="Material1" type="rigid body">
+			<density>1</density>
+			<E>1</E>
+			<v>0</v>
+		</material>
+		<material id="2" name="Material2" type="neo-Hookean">
+			<density>1</density>
+			<E>0.025</E>
+			<v>0.4</v>
+		</material>
+	</Material>
+	<Mesh>
+		<Nodes name="Object2">
+			<node id="1">0,0,0</node>
+			<node id="2">0.606998213,0,0</node>
+			<node id="3">0.577289606,0.187572763,0</node>
+			<node id="4">0.49107187,0.356784598,0</node>
+			<node id="5">0.356784598,0.49107187,0</node>
+			<node id="6">0.187572763,0.577289606,0</node>
+			<node id="7">3.71679209e-17,0.606998213,0</node>
+			<node id="8">1.09259678,0,0</node>
+			<node id="9">1.03912129,0.337630974,0</node>
+			<node id="10">0.883929366,0.642212276,0</node>
+			<node id="11">0.642212276,0.883929366,0</node>
+			<node id="12">0.337630974,1.03912129,0</node>
+			<node id="13">6.69022577e-17,1.09259678,0</node>
+			<node id="14">1.48107564,0,0</node>
+			<node id="15">1.40858664,0.457677543,0</node>
+			<node id="16">1.19821536,0.870554418,0</node>
+			<node id="17">0.870554418,1.19821536,0</node>
+			<node id="18">0.457677543,1.40858664,0</node>
+			<node id="19">9.06897271e-17,1.48107564,0</node>
+			<node id="20">1.79185872,0,0</node>
+			<node id="21">1.70415892,0.553714797,0</node>
+			<node id="22">1.44964416,1.05322813,0</node>
+			<node id="23">1.05322813,1.44964416,0</node>
+			<node id="24">0.553714797,1.70415892,0</node>
+			<node id="25">1.09719703e-16,1.79185872,0</node>
+			<node id="26">2.04048519,0,0</node>
+			<node id="27">1.94061674,0.630544601,0</node>
+			<node id="28">1.6507872,1.1993671,0</node>
+			<node id="29">1.1993671,1.6507872,0</node>
+			<node id="30">0.630544601,1.94061674,0</node>
+			<node id="31">1.24943683e-16,2.04048519,0</node>
+			<node id="32">2.23938637,0,0</node>
+			<node id="33">2.129783,0.692008444,0</node>
+			<node id="34">1.81170163,1.31627828,0</node>
+			<node id="35">1.31627828,1.81170163,0</node>
+			<node id="36">0.692008444,2.129783,0</node>
+			<node id="37">1.37122867e-16,2.23938637,0</node>
+			<node id="38">2.39850731,0,0</node>
+			<node id="39">2.281116,0.741179519,0</node>
+			<node id="40">1.94043317,1.40980722,0</node>
+			<node id="41">1.40980722,1.94043317,0</node>
+			<node id="42">0.741179519,2.281116,0</node>
+			<node id="43">1.46866215e-16,2.39850731,0</node>
+			<node id="44">2.52580406,0,0</node>
+			<node id="45">2.40218241,0.780516378,0</node>
+			<node id="46">2.04341841,1.48463038,0</node>
+			<node id="47">1.48463038,2.04341841,0</node>
+			<node id="48">0.780516378,2.40218241,0</node>
+			<node id="49">1.54660893e-16,2.52580406,0</node>
+			<node id="50">2.62764146,0,0</node>
+			<node id="51">2.49903553,0.811985866,0</node>
+			<node id="52">2.1258066,1.5444889,0</node>
+			<node id="53">1.5444889,2.1258066,0</node>
+			<node id="54">0.811985866,2.49903553,0</node>
+			<node id="55">1.60896635e-16,2.62764146,0</node>
+			<node id="56">2.70911138,0,0</node>
+			<node id="57">2.57651803,0.837161456,0</node>
+			<node id="58">2.19171715,1.59237572,0</node>
+			<node id="59">1.59237572,2.19171715,0</node>
+			<node id="60">0.837161456,2.57651803,0</node>
+			<node id="61">1.65885229e-16,2.70911138,0</node>
+			<node id="62">2.77428732,0,0</node>
+			<node id="63">2.63850403,0.857301928,0</node>
+			<node id="64">2.24444559,1.63068517,0</node>
+			<node id="65">1.63068517,2.24444559,0</node>
+			<node id="66">0.857301928,2.63850403,0</node>
+			<node id="67">1.69876104e-16,2.77428732,0</node>
+			<node id="68">2.82642807,0,0</node>
+			<node id="69">2.68809283,0.873414306,0</node>
+			<node id="70">2.28662834,1.66133273,0</node>
+			<node id="71">1.66133273,2.28662834,0</node>
+			<node id="72">0.873414306,2.68809283,0</node>
+			<node id="73">1.73068804e-16,2.82642807,0</node>
+			<node id="74">2.86814067,0,0</node>
+			<node id="75">2.72776387,0.886304208,0</node>
+			<node id="76">2.32037454,1.68585079,0</node>
+			<node id="77">1.68585079,2.32037454,0</node>
+			<node id="78">0.886304208,2.72776387,0</node>
+			<node id="79">1.75622964e-16,2.86814067,0</node>
+			<node id="80">2.90151075,0,0</node>
+			<node id="81">2.7595007,0.89661613,0</node>
+			<node id="82">2.3473715,1.70546523,0</node>
+			<node id="83">1.70546523,2.3473715,0</node>
+			<node id="84">0.89661613,2.7595007,0</node>
+			<node id="85">1.77666292e-16,2.90151075,0</node>
+			<node id="86">2.92820681,0,0</node>
+			<node id="87">2.78489017,0.904865667,0</node>
+			<node id="88">2.36896907,1.72115678,0</node>
+			<node id="89">1.72115678,2.36896907,0</node>
+			<node id="90">0.904865667,2.78489017,0</node>
+			<node id="91">1.79300955e-16,2.92820681,0</node>
+			<node id="92">2.94956366,0,0</node>
+			<node id="93">2.80520174,0.911465297,0</node>
+			<node id="94">2.38624713,1.73371002,0</node>
+			<node id="95">1.73371002,2.38624713,0</node>
+			<node id="96">0.911465297,2.80520174,0</node>
+			<node id="97">1.80608685e-16,2.94956366,0</node>
+			<node id="98">2.96664914,0,0</node>
+			<node id="99">2.821451,0.916745001,0</node>
+			<node id="100">2.40006957,1.74375261,0</node>
+			<node id="101">1.74375261,2.40006957,0</node>
+			<node id="102">0.916745001,2.821451,0</node>
+			<node id="103">1.81654869e-16,2.96664914,0</node>
+			<node id="104">2.98031753,0,0</node>
+			<node id="105">2.8344504,0.920968764,0</node>
+			<node id="106">2.41112753,1.75178669,0</node>
+			<node id="107">1.75178669,2.41112753,0</node>
+			<node id="108">0.920968764,2.8344504,0</node>
+			<node id="109">1.82491816e-16,2.98031753,0</node>
+			<node id="110">2.99125223,0,0</node>
+			<node id="111">2.84484993,0.924347775,0</node>
+			<node id="112">2.41997389,1.75821395,0</node>
+			<node id="113">1.75821395,2.41997389,0</node>
+			<node id="114">0.924347775,2.84484993,0</node>
+			<node id="115">1.83161374e-16,2.99125223,0</node>
+			<node id="116">3,0,0</node>
+			<node id="117">2.85316955,0.927050983,0</node>
+			<node id="118">2.42705098,1.76335576,0</node>
+			<node id="119">1.76335576,2.42705098,0</node>
+			<node id="120">0.927050983,2.85316955,0</node>
+			<node id="121">1.8369702e-16,3,0</node>
+			<node id="122">0,0,1.5</node>
+			<node id="123">0.606998213,0,1.5</node>
+			<node id="124">0.577289606,0.187572763,1.5</node>
+			<node id="125">0.49107187,0.356784598,1.5</node>
+			<node id="126">0.356784598,0.49107187,1.5</node>
+			<node id="127">0.187572763,0.577289606,1.5</node>
+			<node id="128">3.71679209e-17,0.606998213,1.5</node>
+			<node id="129">1.09259678,0,1.5</node>
+			<node id="130">1.03912129,0.337630974,1.5</node>
+			<node id="131">0.883929366,0.642212276,1.5</node>
+			<node id="132">0.642212276,0.883929366,1.5</node>
+			<node id="133">0.337630974,1.03912129,1.5</node>
+			<node id="134">6.69022577e-17,1.09259678,1.5</node>
+			<node id="135">1.48107564,0,1.5</node>
+			<node id="136">1.40858664,0.457677543,1.5</node>
+			<node id="137">1.19821536,0.870554418,1.5</node>
+			<node id="138">0.870554418,1.19821536,1.5</node>
+			<node id="139">0.457677543,1.40858664,1.5</node>
+			<node id="140">9.06897271e-17,1.48107564,1.5</node>
+			<node id="141">1.79185872,0,1.5</node>
+			<node id="142">1.70415892,0.553714797,1.5</node>
+			<node id="143">1.44964416,1.05322813,1.5</node>
+			<node id="144">1.05322813,1.44964416,1.5</node>
+			<node id="145">0.553714797,1.70415892,1.5</node>
+			<node id="146">1.09719703e-16,1.79185872,1.5</node>
+			<node id="147">2.04048519,0,1.5</node>
+			<node id="148">1.94061674,0.630544601,1.5</node>
+			<node id="149">1.6507872,1.1993671,1.5</node>
+			<node id="150">1.1993671,1.6507872,1.5</node>
+			<node id="151">0.630544601,1.94061674,1.5</node>
+			<node id="152">1.24943683e-16,2.04048519,1.5</node>
+			<node id="153">2.23938637,0,1.5</node>
+			<node id="154">2.129783,0.692008444,1.5</node>
+			<node id="155">1.81170163,1.31627828,1.5</node>
+			<node id="156">1.31627828,1.81170163,1.5</node>
+			<node id="157">0.692008444,2.129783,1.5</node>
+			<node id="158">1.37122867e-16,2.23938637,1.5</node>
+			<node id="159">2.39850731,0,1.5</node>
+			<node id="160">2.281116,0.741179519,1.5</node>
+			<node id="161">1.94043317,1.40980722,1.5</node>
+			<node id="162">1.40980722,1.94043317,1.5</node>
+			<node id="163">0.741179519,2.281116,1.5</node>
+			<node id="164">1.46866215e-16,2.39850731,1.5</node>
+			<node id="165">2.52580406,0,1.5</node>
+			<node id="166">2.40218241,0.780516378,1.5</node>
+			<node id="167">2.04341841,1.48463038,1.5</node>
+			<node id="168">1.48463038,2.04341841,1.5</node>
+			<node id="169">0.780516378,2.40218241,1.5</node>
+			<node id="170">1.54660893e-16,2.52580406,1.5</node>
+			<node id="171">2.62764146,0,1.5</node>
+			<node id="172">2.49903553,0.811985866,1.5</node>
+			<node id="173">2.1258066,1.5444889,1.5</node>
+			<node id="174">1.5444889,2.1258066,1.5</node>
+			<node id="175">0.811985866,2.49903553,1.5</node>
+			<node id="176">1.60896635e-16,2.62764146,1.5</node>
+			<node id="177">2.70911138,0,1.5</node>
+			<node id="178">2.57651803,0.837161456,1.5</node>
+			<node id="179">2.19171715,1.59237572,1.5</node>
+			<node id="180">1.59237572,2.19171715,1.5</node>
+			<node id="181">0.837161456,2.57651803,1.5</node>
+			<node id="182">1.65885229e-16,2.70911138,1.5</node>
+			<node id="183">2.77428732,0,1.5</node>
+			<node id="184">2.63850403,0.857301928,1.5</node>
+			<node id="185">2.24444559,1.63068517,1.5</node>
+			<node id="186">1.63068517,2.24444559,1.5</node>
+			<node id="187">0.857301928,2.63850403,1.5</node>
+			<node id="188">1.69876104e-16,2.77428732,1.5</node>
+			<node id="189">2.82642807,0,1.5</node>
+			<node id="190">2.68809283,0.873414306,1.5</node>
+			<node id="191">2.28662834,1.66133273,1.5</node>
+			<node id="192">1.66133273,2.28662834,1.5</node>
+			<node id="193">0.873414306,2.68809283,1.5</node>
+			<node id="194">1.73068804e-16,2.82642807,1.5</node>
+			<node id="195">2.86814067,0,1.5</node>
+			<node id="196">2.72776387,0.886304208,1.5</node>
+			<node id="197">2.32037454,1.68585079,1.5</node>
+			<node id="198">1.68585079,2.32037454,1.5</node>
+			<node id="199">0.886304208,2.72776387,1.5</node>
+			<node id="200">1.75622964e-16,2.86814067,1.5</node>
+			<node id="201">2.90151075,0,1.5</node>
+			<node id="202">2.7595007,0.89661613,1.5</node>
+			<node id="203">2.3473715,1.70546523,1.5</node>
+			<node id="204">1.70546523,2.3473715,1.5</node>
+			<node id="205">0.89661613,2.7595007,1.5</node>
+			<node id="206">1.77666292e-16,2.90151075,1.5</node>
+			<node id="207">2.92820681,0,1.5</node>
+			<node id="208">2.78489017,0.904865667,1.5</node>
+			<node id="209">2.36896907,1.72115678,1.5</node>
+			<node id="210">1.72115678,2.36896907,1.5</node>
+			<node id="211">0.904865667,2.78489017,1.5</node>
+			<node id="212">1.79300955e-16,2.92820681,1.5</node>
+			<node id="213">2.94956366,0,1.5</node>
+			<node id="214">2.80520174,0.911465297,1.5</node>
+			<node id="215">2.38624713,1.73371002,1.5</node>
+			<node id="216">1.73371002,2.38624713,1.5</node>
+			<node id="217">0.911465297,2.80520174,1.5</node>
+			<node id="218">1.80608685e-16,2.94956366,1.5</node>
+			<node id="219">2.96664914,0,1.5</node>
+			<node id="220">2.821451,0.916745001,1.5</node>
+			<node id="221">2.40006957,1.74375261,1.5</node>
+			<node id="222">1.74375261,2.40006957,1.5</node>
+			<node id="223">0.916745001,2.821451,1.5</node>
+			<node id="224">1.81654869e-16,2.96664914,1.5</node>
+			<node id="225">2.98031753,0,1.5</node>
+			<node id="226">2.8344504,0.920968764,1.5</node>
+			<node id="227">2.41112753,1.75178669,1.5</node>
+			<node id="228">1.75178669,2.41112753,1.5</node>
+			<node id="229">0.920968764,2.8344504,1.5</node>
+			<node id="230">1.82491816e-16,2.98031753,1.5</node>
+			<node id="231">2.99125223,0,1.5</node>
+			<node id="232">2.84484993,0.924347775,1.5</node>
+			<node id="233">2.41997389,1.75821395,1.5</node>
+			<node id="234">1.75821395,2.41997389,1.5</node>
+			<node id="235">0.924347775,2.84484993,1.5</node>
+			<node id="236">1.83161374e-16,2.99125223,1.5</node>
+			<node id="237">3,0,1.5</node>
+			<node id="238">2.85316955,0.927050983,1.5</node>
+			<node id="239">2.42705098,1.76335576,1.5</node>
+			<node id="240">1.76335576,2.42705098,1.5</node>
+			<node id="241">0.927050983,2.85316955,1.5</node>
+			<node id="242">1.8369702e-16,3,1.5</node>
+		</Nodes>
+		<Nodes name="Object3">
+			<node id="243">0,0,1.4999</node>
+			<node id="244">1,0,1.4999</node>
+			<node id="245">0.951056516,0.309016994,1.4999</node>
+			<node id="246">0.809016994,0.587785252,1.4999</node>
+			<node id="247">0.587785252,0.809016994,1.4999</node>
+			<node id="248">0.309016994,0.951056516,1.4999</node>
+			<node id="249">6.123234e-17,1,1.4999</node>
+			<node id="250">2,0,1.4999</node>
+			<node id="251">1.90211303,0.618033989,1.4999</node>
+			<node id="252">1.61803399,1.1755705,1.4999</node>
+			<node id="253">1.1755705,1.61803399,1.4999</node>
+			<node id="254">0.618033989,1.90211303,1.4999</node>
+			<node id="255">1.2246468e-16,2,1.4999</node>
+			<node id="256">3,0,1.4999</node>
+			<node id="257">2.85316955,0.927050983,1.4999</node>
+			<node id="258">2.42705098,1.76335576,1.4999</node>
+			<node id="259">1.76335576,2.42705098,1.4999</node>
+			<node id="260">0.927050983,2.85316955,1.4999</node>
+			<node id="261">1.8369702e-16,3,1.4999</node>
+			<node id="262">4,0,1.4999</node>
+			<node id="263">3.80422607,1.23606798,1.4999</node>
+			<node id="264">3.23606798,2.35114101,1.4999</node>
+			<node id="265">2.35114101,3.23606798,1.4999</node>
+			<node id="266">1.23606798,3.80422607,1.4999</node>
+			<node id="267">2.4492936e-16,4,1.4999</node>
+			<node id="268">5,0,1.4999</node>
+			<node id="269">4.75528258,1.54508497,1.4999</node>
+			<node id="270">4.04508497,2.93892626,1.4999</node>
+			<node id="271">2.93892626,4.04508497,1.4999</node>
+			<node id="272">1.54508497,4.75528258,1.4999</node>
+			<node id="273">3.061617e-16,5,1.4999</node>
+			<node id="274">0,0,1.5999</node>
+			<node id="275">1,0,1.5999</node>
+			<node id="276">0.951056516,0.309016994,1.5999</node>
+			<node id="277">0.809016994,0.587785252,1.5999</node>
+			<node id="278">0.587785252,0.809016994,1.5999</node>
+			<node id="279">0.309016994,0.951056516,1.5999</node>
+			<node id="280">6.123234e-17,1,1.5999</node>
+			<node id="281">2,0,1.5999</node>
+			<node id="282">1.90211303,0.618033989,1.5999</node>
+			<node id="283">1.61803399,1.1755705,1.5999</node>
+			<node id="284">1.1755705,1.61803399,1.5999</node>
+			<node id="285">0.618033989,1.90211303,1.5999</node>
+			<node id="286">1.2246468e-16,2,1.5999</node>
+			<node id="287">3,0,1.5999</node>
+			<node id="288">2.85316955,0.927050983,1.5999</node>
+			<node id="289">2.42705098,1.76335576,1.5999</node>
+			<node id="290">1.76335576,2.42705098,1.5999</node>
+			<node id="291">0.927050983,2.85316955,1.5999</node>
+			<node id="292">1.8369702e-16,3,1.5999</node>
+			<node id="293">4,0,1.5999</node>
+			<node id="294">3.80422607,1.23606798,1.5999</node>
+			<node id="295">3.23606798,2.35114101,1.5999</node>
+			<node id="296">2.35114101,3.23606798,1.5999</node>
+			<node id="297">1.23606798,3.80422607,1.5999</node>
+			<node id="298">2.4492936e-16,4,1.5999</node>
+			<node id="299">5,0,1.5999</node>
+			<node id="300">4.75528258,1.54508497,1.5999</node>
+			<node id="301">4.04508497,2.93892626,1.5999</node>
+			<node id="302">2.93892626,4.04508497,1.5999</node>
+			<node id="303">1.54508497,4.75528258,1.5999</node>
+			<node id="304">3.061617e-16,5,1.5999</node>
+		</Nodes>
+		<Elements type="penta6" name="Part2">
+			<elem id="1">1,2,3,122,123,124</elem>
+			<elem id="2">1,3,4,122,124,125</elem>
+			<elem id="3">1,4,5,122,125,126</elem>
+			<elem id="4">1,5,6,122,126,127</elem>
+			<elem id="5">1,6,7,122,127,128</elem>
+		</Elements>
+		<Elements type="hex8" name="Part2__2">
+			<elem id="6">2,8,9,3,123,129,130,124</elem>
+			<elem id="7">3,9,10,4,124,130,131,125</elem>
+			<elem id="8">4,10,11,5,125,131,132,126</elem>
+			<elem id="9">5,11,12,6,126,132,133,127</elem>
+			<elem id="10">6,12,13,7,127,133,134,128</elem>
+			<elem id="11">8,14,15,9,129,135,136,130</elem>
+			<elem id="12">9,15,16,10,130,136,137,131</elem>
+			<elem id="13">10,16,17,11,131,137,138,132</elem>
+			<elem id="14">11,17,18,12,132,138,139,133</elem>
+			<elem id="15">12,18,19,13,133,139,140,134</elem>
+			<elem id="16">14,20,21,15,135,141,142,136</elem>
+			<elem id="17">15,21,22,16,136,142,143,137</elem>
+			<elem id="18">16,22,23,17,137,143,144,138</elem>
+			<elem id="19">17,23,24,18,138,144,145,139</elem>
+			<elem id="20">18,24,25,19,139,145,146,140</elem>
+			<elem id="21">20,26,27,21,141,147,148,142</elem>
+			<elem id="22">21,27,28,22,142,148,149,143</elem>
+			<elem id="23">22,28,29,23,143,149,150,144</elem>
+			<elem id="24">23,29,30,24,144,150,151,145</elem>
+			<elem id="25">24,30,31,25,145,151,152,146</elem>
+			<elem id="26">26,32,33,27,147,153,154,148</elem>
+			<elem id="27">27,33,34,28,148,154,155,149</elem>
+			<elem id="28">28,34,35,29,149,155,156,150</elem>
+			<elem id="29">29,35,36,30,150,156,157,151</elem>
+			<elem id="30">30,36,37,31,151,157,158,152</elem>
+			<elem id="31">32,38,39,33,153,159,160,154</elem>
+			<elem id="32">33,39,40,34,154,160,161,155</elem>
+			<elem id="33">34,40,41,35,155,161,162,156</elem>
+			<elem id="34">35,41,42,36,156,162,163,157</elem>
+			<elem id="35">36,42,43,37,157,163,164,158</elem>
+			<elem id="36">38,44,45,39,159,165,166,160</elem>
+			<elem id="37">39,45,46,40,160,166,167,161</elem>
+			<elem id="38">40,46,47,41,161,167,168,162</elem>
+			<elem id="39">41,47,48,42,162,168,169,163</elem>
+			<elem id="40">42,48,49,43,163,169,170,164</elem>
+			<elem id="41">44,50,51,45,165,171,172,166</elem>
+			<elem id="42">45,51,52,46,166,172,173,167</elem>
+			<elem id="43">46,52,53,47,167,173,174,168</elem>
+			<elem id="44">47,53,54,48,168,174,175,169</elem>
+			<elem id="45">48,54,55,49,169,175,176,170</elem>
+			<elem id="46">50,56,57,51,171,177,178,172</elem>
+			<elem id="47">51,57,58,52,172,178,179,173</elem>
+			<elem id="48">52,58,59,53,173,179,180,174</elem>
+			<elem id="49">53,59,60,54,174,180,181,175</elem>
+			<elem id="50">54,60,61,55,175,181,182,176</elem>
+			<elem id="51">56,62,63,57,177,183,184,178</elem>
+			<elem id="52">57,63,64,58,178,184,185,179</elem>
+			<elem id="53">58,64,65,59,179,185,186,180</elem>
+			<elem id="54">59,65,66,60,180,186,187,181</elem>
+			<elem id="55">60,66,67,61,181,187,188,182</elem>
+			<elem id="56">62,68,69,63,183,189,190,184</elem>
+			<elem id="57">63,69,70,64,184,190,191,185</elem>
+			<elem id="58">64,70,71,65,185,191,192,186</elem>
+			<elem id="59">65,71,72,66,186,192,193,187</elem>
+			<elem id="60">66,72,73,67,187,193,194,188</elem>
+			<elem id="61">68,74,75,69,189,195,196,190</elem>
+			<elem id="62">69,75,76,70,190,196,197,191</elem>
+			<elem id="63">70,76,77,71,191,197,198,192</elem>
+			<elem id="64">71,77,78,72,192,198,199,193</elem>
+			<elem id="65">72,78,79,73,193,199,200,194</elem>
+			<elem id="66">74,80,81,75,195,201,202,196</elem>
+			<elem id="67">75,81,82,76,196,202,203,197</elem>
+			<elem id="68">76,82,83,77,197,203,204,198</elem>
+			<elem id="69">77,83,84,78,198,204,205,199</elem>
+			<elem id="70">78,84,85,79,199,205,206,200</elem>
+			<elem id="71">80,86,87,81,201,207,208,202</elem>
+			<elem id="72">81,87,88,82,202,208,209,203</elem>
+			<elem id="73">82,88,89,83,203,209,210,204</elem>
+			<elem id="74">83,89,90,84,204,210,211,205</elem>
+			<elem id="75">84,90,91,85,205,211,212,206</elem>
+			<elem id="76">86,92,93,87,207,213,214,208</elem>
+			<elem id="77">87,93,94,88,208,214,215,209</elem>
+			<elem id="78">88,94,95,89,209,215,216,210</elem>
+			<elem id="79">89,95,96,90,210,216,217,211</elem>
+			<elem id="80">90,96,97,91,211,217,218,212</elem>
+			<elem id="81">92,98,99,93,213,219,220,214</elem>
+			<elem id="82">93,99,100,94,214,220,221,215</elem>
+			<elem id="83">94,100,101,95,215,221,222,216</elem>
+			<elem id="84">95,101,102,96,216,222,223,217</elem>
+			<elem id="85">96,102,103,97,217,223,224,218</elem>
+			<elem id="86">98,104,105,99,219,225,226,220</elem>
+			<elem id="87">99,105,106,100,220,226,227,221</elem>
+			<elem id="88">100,106,107,101,221,227,228,222</elem>
+			<elem id="89">101,107,108,102,222,228,229,223</elem>
+			<elem id="90">102,108,109,103,223,229,230,224</elem>
+			<elem id="91">104,110,111,105,225,231,232,226</elem>
+			<elem id="92">105,111,112,106,226,232,233,227</elem>
+			<elem id="93">106,112,113,107,227,233,234,228</elem>
+			<elem id="94">107,113,114,108,228,234,235,229</elem>
+			<elem id="95">108,114,115,109,229,235,236,230</elem>
+			<elem id="96">110,116,117,111,231,237,238,232</elem>
+			<elem id="97">111,117,118,112,232,238,239,233</elem>
+			<elem id="98">112,118,119,113,233,239,240,234</elem>
+			<elem id="99">113,119,120,114,234,240,241,235</elem>
+			<elem id="100">114,120,121,115,235,241,242,236</elem>
+		</Elements>
+		<Elements type="penta6" name="Part3">
+			<elem id="101">243,244,245,274,275,276</elem>
+			<elem id="102">243,245,246,274,276,277</elem>
+			<elem id="103">243,246,247,274,277,278</elem>
+			<elem id="104">243,247,248,274,278,279</elem>
+			<elem id="105">243,248,249,274,279,280</elem>
+		</Elements>
+		<Elements type="hex8" name="Part3__2">
+			<elem id="106">244,250,251,245,275,281,282,276</elem>
+			<elem id="107">245,251,252,246,276,282,283,277</elem>
+			<elem id="108">246,252,253,247,277,283,284,278</elem>
+			<elem id="109">247,253,254,248,278,284,285,279</elem>
+			<elem id="110">248,254,255,249,279,285,286,280</elem>
+			<elem id="111">250,256,257,251,281,287,288,282</elem>
+			<elem id="112">251,257,258,252,282,288,289,283</elem>
+			<elem id="113">252,258,259,253,283,289,290,284</elem>
+			<elem id="114">253,259,260,254,284,290,291,285</elem>
+			<elem id="115">254,260,261,255,285,291,292,286</elem>
+			<elem id="116">256,262,263,257,287,293,294,288</elem>
+			<elem id="117">257,263,264,258,288,294,295,289</elem>
+			<elem id="118">258,264,265,259,289,295,296,290</elem>
+			<elem id="119">259,265,266,260,290,296,297,291</elem>
+			<elem id="120">260,266,267,261,291,297,298,292</elem>
+			<elem id="121">262,268,269,263,293,299,300,294</elem>
+			<elem id="122">263,269,270,264,294,300,301,295</elem>
+			<elem id="123">264,270,271,265,295,301,302,296</elem>
+			<elem id="124">265,271,272,266,296,302,303,297</elem>
+			<elem id="125">266,272,273,267,297,303,304,298</elem>
+		</Elements>
+		<Surface name="SymmetryPlane1">
+			<quad4 id="1">1,2,123,122</quad4>
+			<quad4 id="2">2,8,129,123</quad4>
+			<quad4 id="3">8,14,135,129</quad4>
+			<quad4 id="4">14,20,141,135</quad4>
+			<quad4 id="5">20,26,147,141</quad4>
+			<quad4 id="6">26,32,153,147</quad4>
+			<quad4 id="7">32,38,159,153</quad4>
+			<quad4 id="8">38,44,165,159</quad4>
+			<quad4 id="9">44,50,171,165</quad4>
+			<quad4 id="10">50,56,177,171</quad4>
+			<quad4 id="11">56,62,183,177</quad4>
+			<quad4 id="12">62,68,189,183</quad4>
+			<quad4 id="13">68,74,195,189</quad4>
+			<quad4 id="14">74,80,201,195</quad4>
+			<quad4 id="15">80,86,207,201</quad4>
+			<quad4 id="16">86,92,213,207</quad4>
+			<quad4 id="17">92,98,219,213</quad4>
+			<quad4 id="18">98,104,225,219</quad4>
+			<quad4 id="19">104,110,231,225</quad4>
+			<quad4 id="20">110,116,237,231</quad4>
+		</Surface>
+		<Surface name="SymmetryPlane2">
+			<quad4 id="1">122,128,7,1</quad4>
+			<quad4 id="2">128,134,13,7</quad4>
+			<quad4 id="3">134,140,19,13</quad4>
+			<quad4 id="4">140,146,25,19</quad4>
+			<quad4 id="5">146,152,31,25</quad4>
+			<quad4 id="6">152,158,37,31</quad4>
+			<quad4 id="7">158,164,43,37</quad4>
+			<quad4 id="8">164,170,49,43</quad4>
+			<quad4 id="9">170,176,55,49</quad4>
+			<quad4 id="10">176,182,61,55</quad4>
+			<quad4 id="11">182,188,67,61</quad4>
+			<quad4 id="12">188,194,73,67</quad4>
+			<quad4 id="13">194,200,79,73</quad4>
+			<quad4 id="14">200,206,85,79</quad4>
+			<quad4 id="15">206,212,91,85</quad4>
+			<quad4 id="16">212,218,97,91</quad4>
+			<quad4 id="17">218,224,103,97</quad4>
+			<quad4 id="18">224,230,109,103</quad4>
+			<quad4 id="19">230,236,115,109</quad4>
+			<quad4 id="20">236,242,121,115</quad4>
+		</Surface>
+		<Surface name="SlidingElastic1Primary">
+			<tri3 id="1">122,123,124</tri3>
+			<quad4 id="2">123,129,130,124</quad4>
+			<quad4 id="3">129,135,136,130</quad4>
+			<quad4 id="4">135,141,142,136</quad4>
+			<quad4 id="5">141,147,148,142</quad4>
+			<quad4 id="6">147,153,154,148</quad4>
+			<quad4 id="7">153,159,160,154</quad4>
+			<quad4 id="8">159,165,166,160</quad4>
+			<quad4 id="9">165,171,172,166</quad4>
+			<quad4 id="10">171,177,178,172</quad4>
+			<quad4 id="11">177,183,184,178</quad4>
+			<quad4 id="12">183,189,190,184</quad4>
+			<quad4 id="13">189,195,196,190</quad4>
+			<quad4 id="14">195,201,202,196</quad4>
+			<quad4 id="15">201,207,208,202</quad4>
+			<quad4 id="16">207,213,214,208</quad4>
+			<quad4 id="17">213,219,220,214</quad4>
+			<quad4 id="18">219,225,226,220</quad4>
+			<quad4 id="19">225,231,232,226</quad4>
+			<quad4 id="20">231,237,238,232</quad4>
+			<tri3 id="21">122,124,125</tri3>
+			<quad4 id="22">124,130,131,125</quad4>
+			<quad4 id="23">130,136,137,131</quad4>
+			<quad4 id="24">136,142,143,137</quad4>
+			<quad4 id="25">142,148,149,143</quad4>
+			<quad4 id="26">148,154,155,149</quad4>
+			<quad4 id="27">154,160,161,155</quad4>
+			<quad4 id="28">160,166,167,161</quad4>
+			<quad4 id="29">166,172,173,167</quad4>
+			<quad4 id="30">172,178,179,173</quad4>
+			<quad4 id="31">178,184,185,179</quad4>
+			<quad4 id="32">184,190,191,185</quad4>
+			<quad4 id="33">190,196,197,191</quad4>
+			<quad4 id="34">196,202,203,197</quad4>
+			<quad4 id="35">202,208,209,203</quad4>
+			<quad4 id="36">208,214,215,209</quad4>
+			<quad4 id="37">214,220,221,215</quad4>
+			<quad4 id="38">220,226,227,221</quad4>
+			<quad4 id="39">226,232,233,227</quad4>
+			<quad4 id="40">232,238,239,233</quad4>
+			<tri3 id="41">122,125,126</tri3>
+			<quad4 id="42">125,131,132,126</quad4>
+			<quad4 id="43">131,137,138,132</quad4>
+			<quad4 id="44">137,143,144,138</quad4>
+			<quad4 id="45">143,149,150,144</quad4>
+			<quad4 id="46">149,155,156,150</quad4>
+			<quad4 id="47">155,161,162,156</quad4>
+			<quad4 id="48">161,167,168,162</quad4>
+			<quad4 id="49">167,173,174,168</quad4>
+			<quad4 id="50">173,179,180,174</quad4>
+			<quad4 id="51">179,185,186,180</quad4>
+			<quad4 id="52">185,191,192,186</quad4>
+			<quad4 id="53">191,197,198,192</quad4>
+			<quad4 id="54">197,203,204,198</quad4>
+			<quad4 id="55">203,209,210,204</quad4>
+			<quad4 id="56">209,215,216,210</quad4>
+			<quad4 id="57">215,221,222,216</quad4>
+			<quad4 id="58">221,227,228,222</quad4>
+			<quad4 id="59">227,233,234,228</quad4>
+			<quad4 id="60">233,239,240,234</quad4>
+			<tri3 id="61">122,126,127</tri3>
+			<quad4 id="62">126,132,133,127</quad4>
+			<quad4 id="63">132,138,139,133</quad4>
+			<quad4 id="64">138,144,145,139</quad4>
+			<quad4 id="65">144,150,151,145</quad4>
+			<quad4 id="66">150,156,157,151</quad4>
+			<quad4 id="67">156,162,163,157</quad4>
+			<quad4 id="68">162,168,169,163</quad4>
+			<quad4 id="69">168,174,175,169</quad4>
+			<quad4 id="70">174,180,181,175</quad4>
+			<quad4 id="71">180,186,187,181</quad4>
+			<quad4 id="72">186,192,193,187</quad4>
+			<quad4 id="73">192,198,199,193</quad4>
+			<quad4 id="74">198,204,205,199</quad4>
+			<quad4 id="75">204,210,211,205</quad4>
+			<quad4 id="76">210,216,217,211</quad4>
+			<quad4 id="77">216,222,223,217</quad4>
+			<quad4 id="78">222,228,229,223</quad4>
+			<quad4 id="79">228,234,235,229</quad4>
+			<quad4 id="80">234,240,241,235</quad4>
+			<tri3 id="81">122,127,128</tri3>
+			<quad4 id="82">127,133,134,128</quad4>
+			<quad4 id="83">133,139,140,134</quad4>
+			<quad4 id="84">139,145,146,140</quad4>
+			<quad4 id="85">145,151,152,146</quad4>
+			<quad4 id="86">151,157,158,152</quad4>
+			<quad4 id="87">157,163,164,158</quad4>
+			<quad4 id="88">163,169,170,164</quad4>
+			<quad4 id="89">169,175,176,170</quad4>
+			<quad4 id="90">175,181,182,176</quad4>
+			<quad4 id="91">181,187,188,182</quad4>
+			<quad4 id="92">187,193,194,188</quad4>
+			<quad4 id="93">193,199,200,194</quad4>
+			<quad4 id="94">199,205,206,200</quad4>
+			<quad4 id="95">205,211,212,206</quad4>
+			<quad4 id="96">211,217,218,212</quad4>
+			<quad4 id="97">217,223,224,218</quad4>
+			<quad4 id="98">223,229,230,224</quad4>
+			<quad4 id="99">229,235,236,230</quad4>
+			<quad4 id="100">235,241,242,236</quad4>
+		</Surface>
+		<Surface name="SlidingElastic1Secondary">
+			<tri3 id="1">243,245,244</tri3>
+			<quad4 id="2">245,251,250,244</quad4>
+			<quad4 id="3">251,257,256,250</quad4>
+			<quad4 id="4">257,263,262,256</quad4>
+			<quad4 id="5">263,269,268,262</quad4>
+			<tri3 id="6">243,246,245</tri3>
+			<quad4 id="7">246,252,251,245</quad4>
+			<quad4 id="8">252,258,257,251</quad4>
+			<quad4 id="9">258,264,263,257</quad4>
+			<quad4 id="10">264,270,269,263</quad4>
+			<tri3 id="11">243,247,246</tri3>
+			<quad4 id="12">247,253,252,246</quad4>
+			<quad4 id="13">253,259,258,252</quad4>
+			<quad4 id="14">259,265,264,258</quad4>
+			<quad4 id="15">265,271,270,264</quad4>
+			<tri3 id="16">243,248,247</tri3>
+			<quad4 id="17">248,254,253,247</quad4>
+			<quad4 id="18">254,260,259,253</quad4>
+			<quad4 id="19">260,266,265,259</quad4>
+			<quad4 id="20">266,272,271,265</quad4>
+			<tri3 id="21">243,249,248</tri3>
+			<quad4 id="22">249,255,254,248</quad4>
+			<quad4 id="23">255,261,260,254</quad4>
+			<quad4 id="24">261,267,266,260</quad4>
+			<quad4 id="25">267,273,272,266</quad4>
+		</Surface>
+		<Surface name="ZeroDisplacement1">
+			<tri3 id="1">1,3,2</tri3>
+			<quad4 id="2">3,9,8,2</quad4>
+			<quad4 id="3">9,15,14,8</quad4>
+			<quad4 id="4">15,21,20,14</quad4>
+			<quad4 id="5">21,27,26,20</quad4>
+			<quad4 id="6">27,33,32,26</quad4>
+			<quad4 id="7">33,39,38,32</quad4>
+			<quad4 id="8">39,45,44,38</quad4>
+			<quad4 id="9">45,51,50,44</quad4>
+			<quad4 id="10">51,57,56,50</quad4>
+			<quad4 id="11">57,63,62,56</quad4>
+			<quad4 id="12">63,69,68,62</quad4>
+			<quad4 id="13">69,75,74,68</quad4>
+			<quad4 id="14">75,81,80,74</quad4>
+			<quad4 id="15">81,87,86,80</quad4>
+			<quad4 id="16">87,93,92,86</quad4>
+			<quad4 id="17">93,99,98,92</quad4>
+			<quad4 id="18">99,105,104,98</quad4>
+			<quad4 id="19">105,111,110,104</quad4>
+			<quad4 id="20">111,117,116,110</quad4>
+			<tri3 id="21">1,4,3</tri3>
+			<quad4 id="22">4,10,9,3</quad4>
+			<quad4 id="23">10,16,15,9</quad4>
+			<quad4 id="24">16,22,21,15</quad4>
+			<quad4 id="25">22,28,27,21</quad4>
+			<quad4 id="26">28,34,33,27</quad4>
+			<quad4 id="27">34,40,39,33</quad4>
+			<quad4 id="28">40,46,45,39</quad4>
+			<quad4 id="29">46,52,51,45</quad4>
+			<quad4 id="30">52,58,57,51</quad4>
+			<quad4 id="31">58,64,63,57</quad4>
+			<quad4 id="32">64,70,69,63</quad4>
+			<quad4 id="33">70,76,75,69</quad4>
+			<quad4 id="34">76,82,81,75</quad4>
+			<quad4 id="35">82,88,87,81</quad4>
+			<quad4 id="36">88,94,93,87</quad4>
+			<quad4 id="37">94,100,99,93</quad4>
+			<quad4 id="38">100,106,105,99</quad4>
+			<quad4 id="39">106,112,111,105</quad4>
+			<quad4 id="40">112,118,117,111</quad4>
+			<tri3 id="41">1,5,4</tri3>
+			<quad4 id="42">5,11,10,4</quad4>
+			<quad4 id="43">11,17,16,10</quad4>
+			<quad4 id="44">17,23,22,16</quad4>
+			<quad4 id="45">23,29,28,22</quad4>
+			<quad4 id="46">29,35,34,28</quad4>
+			<quad4 id="47">35,41,40,34</quad4>
+			<quad4 id="48">41,47,46,40</quad4>
+			<quad4 id="49">47,53,52,46</quad4>
+			<quad4 id="50">53,59,58,52</quad4>
+			<quad4 id="51">59,65,64,58</quad4>
+			<quad4 id="52">65,71,70,64</quad4>
+			<quad4 id="53">71,77,76,70</quad4>
+			<quad4 id="54">77,83,82,76</quad4>
+			<quad4 id="55">83,89,88,82</quad4>
+			<quad4 id="56">89,95,94,88</quad4>
+			<quad4 id="57">95,101,100,94</quad4>
+			<quad4 id="58">101,107,106,100</quad4>
+			<quad4 id="59">107,113,112,106</quad4>
+			<quad4 id="60">113,119,118,112</quad4>
+			<tri3 id="61">1,6,5</tri3>
+			<quad4 id="62">6,12,11,5</quad4>
+			<quad4 id="63">12,18,17,11</quad4>
+			<quad4 id="64">18,24,23,17</quad4>
+			<quad4 id="65">24,30,29,23</quad4>
+			<quad4 id="66">30,36,35,29</quad4>
+			<quad4 id="67">36,42,41,35</quad4>
+			<quad4 id="68">42,48,47,41</quad4>
+			<quad4 id="69">48,54,53,47</quad4>
+			<quad4 id="70">54,60,59,53</quad4>
+			<quad4 id="71">60,66,65,59</quad4>
+			<quad4 id="72">66,72,71,65</quad4>
+			<quad4 id="73">72,78,77,71</quad4>
+			<quad4 id="74">78,84,83,77</quad4>
+			<quad4 id="75">84,90,89,83</quad4>
+			<quad4 id="76">90,96,95,89</quad4>
+			<quad4 id="77">96,102,101,95</quad4>
+			<quad4 id="78">102,108,107,101</quad4>
+			<quad4 id="79">108,114,113,107</quad4>
+			<quad4 id="80">114,120,119,113</quad4>
+			<tri3 id="81">1,7,6</tri3>
+			<quad4 id="82">7,13,12,6</quad4>
+			<quad4 id="83">13,19,18,12</quad4>
+			<quad4 id="84">19,25,24,18</quad4>
+			<quad4 id="85">25,31,30,24</quad4>
+			<quad4 id="86">31,37,36,30</quad4>
+			<quad4 id="87">37,43,42,36</quad4>
+			<quad4 id="88">43,49,48,42</quad4>
+			<quad4 id="89">49,55,54,48</quad4>
+			<quad4 id="90">55,61,60,54</quad4>
+			<quad4 id="91">61,67,66,60</quad4>
+			<quad4 id="92">67,73,72,66</quad4>
+			<quad4 id="93">73,79,78,72</quad4>
+			<quad4 id="94">79,85,84,78</quad4>
+			<quad4 id="95">85,91,90,84</quad4>
+			<quad4 id="96">91,97,96,90</quad4>
+			<quad4 id="97">97,103,102,96</quad4>
+			<quad4 id="98">103,109,108,102</quad4>
+			<quad4 id="99">109,115,114,108</quad4>
+			<quad4 id="100">115,121,120,114</quad4>
+		</Surface>
+		<Surface name="ZeroFluidPressure2">
+			<quad4 id="1">116,117,238,237</quad4>
+			<quad4 id="2">117,118,239,238</quad4>
+			<quad4 id="3">118,119,240,239</quad4>
+			<quad4 id="4">119,120,241,240</quad4>
+			<quad4 id="5">120,121,242,241</quad4>
+		</Surface>
+		<SurfacePair name="SlidingElastic1">
+			<primary>SlidingElastic1Primary</primary>
+			<secondary>SlidingElastic1Secondary</secondary>
+		</SurfacePair>
+	</Mesh>
+	<MeshDomains>
+		<SolidDomain name="Part2" mat="Material2"/>
+		<SolidDomain name="Part2__2" mat="Material2"/>
+		<SolidDomain name="Part3" mat="Material1"/>
+		<SolidDomain name="Part3__2" mat="Material1"/>
+	</MeshDomains>
+	<Boundary>
+		<bc name="ZeroDisplacement1" node_set="@surface:ZeroDisplacement1" type="zero displacement">
+			<x_dof>0</x_dof>
+			<y_dof>0</y_dof>
+			<z_dof>1</z_dof>
+		</bc>
+		<bc name="ZeroFluidPressure2" node_set="@surface:ZeroFluidPressure2" type="zero fluid pressure"/>
+	</Boundary>
+	<Rigid>
+		<rigid_bc name="RigidConstraint1" type="rigid_fixed">
+			<rb>Material1</rb>
+			<Rx_dof>1</Rx_dof>
+			<Ry_dof>1</Ry_dof>
+			<Rz_dof>0</Rz_dof>
+			<Ru_dof>1</Ru_dof>
+			<Rv_dof>1</Rv_dof>
+			<Rw_dof>1</Rw_dof>
+		</rigid_bc>
+		<rigid_bc name="RigidConstraint2" type="rigid_displacement">
+			<rb>Material1</rb>
+			<dof>z</dof>
+			<value lc="1">-1</value>
+			<relative>0</relative>
+		</rigid_bc>
+	</Rigid>
+	<Contact>
+		<contact name="SlidingElastic1" surface_pair="SlidingElastic1" type="sliding-elastic">
+			<laugon>PENALTY</laugon>
+			<tolerance>0.1</tolerance>
+			<gaptol>0</gaptol>
+			<penalty>1000</penalty>
+			<auto_penalty>1</auto_penalty>
+			<update_penalty>0</update_penalty>
+			<two_pass>0</two_pass>
+			<knmult>0</knmult>
+			<search_tol>0.01</search_tol>
+			<symmetric_stiffness>0</symmetric_stiffness>
+			<search_radius>1</search_radius>
+			<seg_up>0</seg_up>
+			<tension>0</tension>
+			<minaug>0</minaug>
+			<maxaug>10</maxaug>
+			<node_reloc>0</node_reloc>
+			<fric_coeff>0</fric_coeff>
+			<smooth_aug>0</smooth_aug>
+			<flip_primary>0</flip_primary>
+			<flip_secondary>0</flip_secondary>
+			<shell_bottom_primary>0</shell_bottom_primary>
+			<shell_bottom_secondary>0</shell_bottom_secondary>
+			<offset>0</offset>
+		</contact>
+	</Contact>
+	<Constraints>
+		<constraint name="SymmetryPlane1" surface="SymmetryPlane1" type="symmetry plane">
+			<laugon>1</laugon>
+			<tol>0.1</tol>
+			<penalty>10</penalty>
+			<rhs>0</rhs>
+			<minaug>0</minaug>
+			<maxaug>50</maxaug>
+		</constraint>
+		<constraint name="SymmetryPlane2" surface="SymmetryPlane2" type="symmetry plane">
+			<laugon>1</laugon>
+			<tol>0.1</tol>
+			<penalty>10</penalty>
+			<rhs>0</rhs>
+			<minaug>0</minaug>
+			<maxaug>50</maxaug>
+		</constraint>
+	</Constraints>
+	<LoadData>
+		<load_controller id="1" name="LC1" type="loadcurve">
+			<interpolate>LINEAR</interpolate>
+			<extend>CONSTANT</extend>
+			<points>
+				<pt>0,0</pt>
+				<pt>30,1</pt>
+			</points>
+		</load_controller>
+		<load_controller id="2" name="LC2" type="loadcurve">
+			<interpolate>LINEAR</interpolate>
+			<extend>CONSTANT</extend>
+			<points>
+				<pt>0,0.1</pt>
+				<pt>30,0.5</pt>
+			</points>
+		</load_controller>
+	</LoadData>
+	<Output>
+		<plotfile type="febio">
+			<var type="displacement"/>
+			<var type="stress"/>
+			<var type="relative volume"/>
+			<var type="solid stress"/>
+			<var type="effective fluid pressure"/>
+			<var type="fluid pressure"/>
+			<var type="fluid flux"/>
+			<var type="contact pressure"/>
+			<var type="contact gap"/>
+			<var type="reaction forces"/>
+			<var type="rigid force"/>
+			<var type="surface reaction force"/>
+		</plotfile>
+	</Output>
+</febio_spec>
