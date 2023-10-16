@@ -56,17 +56,18 @@ end
 function getCenterMeanStd(SOM::SelfOrganizingMap, data::AbstractMatrix)
     set = splitDataByAssignment(SOM, data[3:end,:])
 
-    mean_std = Vector{Tuple{Vector{Float64}, Vector{Float64}}}(undef, length(set))
+    mean_std = Vector{Matrix{Float64}}(undef, length(set))
     for (i, center) in enumerate(eachcol(SOM.weights))
-        out = (vec(mean(set[i]; dims=2)), vec(std(set[i]; dims=2)))
-        mean_std[i] = out
+        mean_std[i] = [vec(mean(set[i]; dims=2)) vec(std(set[i]; dims=2))]
     end
-    return mean_std
+    return reduce(hcat, mean_std)
 end
 
-function getKMeansCenters(data::AbstractMatrix, n::Int64)
-    result = kmeans(data[3:end,:], n; tol=1e-30)
-    return result.centers
+
+function splitCenterStatsByVariable(SOM::SelfOrganizingMap, data::AbstractMatrix)
+    stats = getCenterMeanStd(SOM, data)
+    var_stats = [ reduce(hcat, [[stats[i][1][j], stats[i][2][j]] for i in 1:4]) for j in 1:5]
+    return var_stats
 end
 
 

@@ -4,3 +4,4 @@ extra/
 0.75s-dwell_3s-period/
 platen_force/
 sinusoid/
+*.csv
