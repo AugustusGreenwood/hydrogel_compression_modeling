@@ -19,8 +19,8 @@ module SelfOrganizingMaps
     using Statistics, Plots, Random, ..DataInteract
     using Clustering: kmeans
     plotlyjs()
-    export getCenterMeanStd, splitDataByAssignment, plotSOM, train!, SelfOrganizingMap, getKMeansCenters
-    include("SOM.jl")
+    export getCenterMeanStd, splitDataByAssignment, plotSOM, train!, SelfOrganizingMap, splitCenterStatsByVariable
+    include("SelfOrganizingMaps.jl")
 end
 
 module Waveform
