@@ -82,6 +82,23 @@ function getAllDataAtIndex(root::String, index::Int64)
     return data
 end
 
+
+function getTimepointData(dir::String)
+    timepoints = getTimepointIndices(dir)
+    return [getAllDataAtIndex(dir, point) for point in timepoints]
+end
+
+
+function getTimepointIndices(dir::String)
+    f = open(joinpath(["$dir", "indices.txt"]))
+    readline(f)
+    
+    r, eor, eor_dwell, eoc, eoc_dwell = @scanf(readline(f), "%i, %i, %i, %i\n", Int64, Int64, Int64, Int64)
+    close(f)
+    return eor, eor_dwell, eoc, eoc_dwell
+end
+
+
 function __parse_feb_file_node_position_line(line::String)::Tuple{Int64, Vector{Float64}}
     r, id, s = @scanf(line, "\t\t\t<node id=\"%i\">%[^<]s</node>\n", Int64, String)
     pos = parse.(Float64, split(s, ','))

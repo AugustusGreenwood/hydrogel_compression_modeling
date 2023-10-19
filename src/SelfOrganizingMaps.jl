@@ -71,6 +71,28 @@ function splitCenterStatsByVariable(SOM::SelfOrganizingMap, data::AbstractMatrix
 end
 
 
+function getAllMapsAtTimepoint(dir::String, clusters::Int64, itrs::Int64, h0::Function, σ::Function)
+    data = getTimepointData(dir)
+    scaled_data = [scaleData(d) for d in data]
+    SOMs = [SelfOrganizingMap(d, clusters, h0, σ) for d in scaled_data]
+
+    Threads.@threads for SOM in SOMs
+        train!(SOM, itrs)
+    end
+    return SOMs
+end
+
+function getAllCenterStatisticsAtTimepoint(dir::String, clusters::Int64, itrs::Int64, h0::Function, σ::Function)
+    SOMs = getAllMapsAtTimepoint(dir, clusters, itrs, h0, σ)
+    stats = [getCenterMeanStd(d, d.data) for d in SOMs]
+    return stats
+end
+
+function getAllCenterStatisticsAtTimepoint(SOMs::AbstractVector)
+    stats = [getCenterMeanStd(d, d.data) for d in SOMs]
+    return stats
+end
+
 function __gaussian(ri::Vector{Float64}, r0::Vector{Float64}, σ::Float64)
     return exp(-sqrt(sum((ri .- r0).^2)) / (2*σ^2))
 end
@@ -87,7 +109,7 @@ function __generateCoordinates(n)
 end
 
 function __generateWeights(D, n)
-    return rand(-1.0:0.000001:1.0, size(D,1)-2, n)
+    return rand(-1.0:0.0001:1.0, size(D,1)-2, n)
 end
 
 function __getBestMatchingUnitIndex(SOM::SelfOrganizingMap, point::AbstractVector{Float64})
