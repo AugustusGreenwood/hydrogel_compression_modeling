@@ -46,7 +46,7 @@ end
 function scaleData(data::AbstractVector{Float64})
     min, max = minimum(data), maximum(data)
 
-    return @. 2 * (data - min) / (max - min) - 1
+    return @. (data - min) / (max - min)
 end
 
 function scaleData(data::AbstractMatrix{Float64})
