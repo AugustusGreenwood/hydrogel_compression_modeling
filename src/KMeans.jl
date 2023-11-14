@@ -1,35 +1,5 @@
-data_file_names = [
-    "hpos.dat", "rpos.dat", "lagrange_strain_invariant_1.dat",
-    "lagrange_strain_invariant_2.dat", "lagrange_strain_invariant_3.dat",
-    "fluid_flux_magnitude.dat", "hydrostatic_pressure.dat"
-]
-time = [:EOR, :EORD, :EOC, :EOCD]
-scaling = [_0_to_1_scaling, _neg1_to_1_scaling, ]
 
 
-
-
-function do_all(root_dir::String, out_file_name::String, time::Float64, scaling::Function, var_clust::Symbol)
-    vec_data = getAllFEBioDataAtTime(root_dir, time)
-    mat_data = collectFEBioData(vec_data)
-    scaleData!(view(mat_data, 3:7, :), scaling)
-    result = kmeans(view(mat_data, 3:7, :), 3; display=:iter)
-    vec_stats = getClusterPositionStatistics(result, mat_data)
-    mat_stats = collectClutserStatistics(vec_stats, var_clust)
-    writeClusterStatistics(mat_stats, out_file_name)
-end
-
-
-function writeClusterStatistics(stats::Matrix, path::String)
-    open(path, "w") do file
-        for row in eachrow(stats)
-            for ele in row
-                write(file, "$ele,\t")
-            end
-            write(file, "\n")
-        end
-    end
-end
 #=
 This converts the vector in "getClusterPositionStatistics" so that either
 the columns are cluster based (:column) or so that columns are variable
@@ -43,7 +13,7 @@ We need to go from each vector being NxM to 1xN*M. reduce(hcat, eachrow(stat)')
 accomplishes this.
 Now we have a n length vector which is composed of 1xN*M matrics, so 
 they just need to be stack from vector form into a complete matrix.
-That what the final 'reduce(vcat, [...])' does. hope you enjoyed my novel!
+That what the final 'reduce(vcat, [...])' does. Don't @ me if it fails
 =#
 function collectClutserStatistics(stats::Vector{Matrix{Float64}}, type::Symbol)
     if type == :cluster
@@ -118,11 +88,6 @@ function scaleData(data::Matrix{Float64}, fn::Function)::Matrix{Float64}
         scaled_data[i, :] = fn(row)
     end
     return scaled_data
-end
-
-
-function _align_stacked_cluster_statistics(stats::Vector{Matrix{Float64}})
-
 end
 
 function _get_cluster_distance_statistics(centroid::Vector{Float64}, data::Matrix{Float64})

@@ -1,3 +1,59 @@
+function writeClusterStatisticsForProject()
+    dirs = ["1s-dwell_3s-period/", "0.75s-dwell_3s-period/", "0.5s-dwell_3s-period/", "sinusoid/"]
+    time_dicts = [_1_times, _075_times, _05_times, _sin_times]
+    times = [:EOR, :EORD, :EOC, :EOCD]
+    scalings = ["stdev", "01", "n11"]
+    types = [:variable, :cluster]
+
+
+    Threads.@threads for (i, dir) in collect(enumerate(dirs))
+        for time in times
+            for scaling in scalings
+                for type in types
+                    if scaling == "stdev"
+                        scale_func = _std_dev_scaling
+                    elseif scaling == "01"
+                        scale_func = _0_to_1_scaling
+                    elseif scaling == "n11"
+                        scale_func = _neg1_to_1_scaling
+                    end
+                    if dir == "sinusoid/"
+                        if time == :EORD || time == :EOCD
+                            continue
+                        end
+                    end
+                    writeClusterStatisticsForDirectory(dir, "$(dir)$(time)_$(scaling)_$(type).csv", time_dicts[i][time], scale_func, type)
+                end
+            end
+        end
+    end
+end
+
+
+
+function writeClusterStatisticsForDirectory(root_dir::String, out_file_name::String, time::Float64, scaling::Function, var_clust::Symbol)
+    vec_data = getAllFEBioDataAtTime(root_dir, time)
+    mat_data = collectFEBioData(vec_data)
+    scaleData!(view(mat_data, 3:7, :), scaling)
+    result = kmeans(view(mat_data, 3:7, :), 3; display=:iter)
+    vec_stats = getClusterPositionStatistics(result, mat_data)
+    mat_stats = collectClutserStatistics(vec_stats, var_clust)
+    writeClusterStatistics(mat_stats, out_file_name)
+end
+
+
+function writeClusterStatistics(stats::Matrix, path::String)
+    open(path, "w") do file
+        for row in eachrow(stats)
+            for ele in row
+                write(file, "$ele,\t")
+            end
+            write(file, "\n")
+        end
+    end
+end
+
+
 function readFEBioDataFile(path::String)::Dict{Int64,Vector{Float64}}
     matrix_data, keys = open(path, "r") do file
         return _get_FEBio_data_and_keys(file)

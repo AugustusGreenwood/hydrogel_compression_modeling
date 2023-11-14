@@ -5,5 +5,7 @@ extra/
 platen_force/
 sinusoid/
 backup/
-verification/*/jobs/
 *.csv
+verification/confined_compression/jobs/
+verification/models/jobs/
+verification/unconfined_compression/jobs/
