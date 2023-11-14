@@ -6,5 +6,4 @@ platen_force/
 sinusoid/
 backup/
 verification/*/jobs/
-verification/*/*.fs2
 *.csv
