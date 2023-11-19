@@ -22,25 +22,40 @@ function writeClusterStatisticsForProject()
                             continue
                         end
                     end
-                    writeClusterStatisticsForDirectory(dir, "$(dir)$(time)_$(scaling)_$(type).csv", time_dicts[i][time], scale_func, type)
+                    writeClusterStatisticsForDirectory(dir, "$(dir)scaled_ind/$(time)_$(scaling)_$(type).csv", time_dicts[i][time], scale_func, type)
                 end
             end
         end
     end
 end
 
+function writeClusterStatisticsForDirectory(root_dir::Vector, out_file_name::String, time::Float64, scaling::Function, var_clust::Symbol)
+    vec_data = getAllFEBioDataAtTime(root_dir, time)
+    mat_data = collectFEBioData(vec_data)
+    scaleData!(view(mat_data, 3:7, :), scaling)
+    result = kmeans(view(mat_data, 3:7, :), 3; display=:iter, tol=0.0)
+    vec_stats = getClusterPositionStatistics(result, mat_data)
+    mat_stats = collectClutserStatistics(vec_stats, var_clust)
+    writeClusterStatistics(mat_stats, out_file_name)
+end
 
 
 function writeClusterStatisticsForDirectory(root_dir::String, out_file_name::String, time::Float64, scaling::Function, var_clust::Symbol)
     vec_data = getAllFEBioDataAtTime(root_dir, time)
     mat_data = collectFEBioData(vec_data)
     scaleData!(view(mat_data, 3:7, :), scaling)
-    result = kmeans(view(mat_data, 3:7, :), 3; display=:iter)
+    result = kmeans(view(mat_data, 3:7, :), 3; display=:iter, tol=0.0)
     vec_stats = getClusterPositionStatistics(result, mat_data)
     mat_stats = collectClutserStatistics(vec_stats, var_clust)
     writeClusterStatistics(mat_stats, out_file_name)
 end
 
+function writeClusterStatistics(data::Matrix{Float64}, out_file_name::String, var_clust::Symbol)
+    result = kmeans(view(data, 3:7, :), 3; display=:iter, tol=0.0)
+    vec_stats = getClusterPositionStatistics(result, data)
+    mat_stats = collectClutserStatistics(vec_stats, var_clust)
+    writeClusterStatistics(mat_stats, out_file_name)
+end
 
 function writeClusterStatistics(stats::Matrix, path::String)
     open(path, "w") do file
@@ -53,6 +68,10 @@ function writeClusterStatistics(stats::Matrix, path::String)
     end
 end
 
+
+function readAllProjectData(time_1::Union{Float64,Int64}, time_075::Union{Float64,Int64}, time_05::Union{Float64,Int64}, time_sin::Union{Float64,Int64})
+    return collectFEBioData(getAllFEBioDataAtTime("1s-dwell_3s-period/", time_1), true), collectFEBioData(getAllFEBioDataAtTime("0.75s-dwell_3s-period/", time_075), true), collectFEBioData(getAllFEBioDataAtTime("0.5s-dwell_3s-period/", time_05), true), collectFEBioData(getAllFEBioDataAtTime("sinusoid/", time_sin), true)
+end
 
 function readFEBioDataFile(path::String)::Dict{Int64,Vector{Float64}}
     matrix_data, keys = open(path, "r") do file

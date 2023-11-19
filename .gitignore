@@ -1,9 +1,9 @@
 extra/
-0.5s-dwell_3s-period/
-1s-dwell_3s-period/
-0.75s-dwell_3s-period/
+0.5s-dwell_3s-period/jobs/
+1s-dwell_3s-period/jobs/
+0.75s-dwell_3s-period/jobs/
 platen_force/
-sinusoid/
+sinusoid/jobs/
 backup/
 *.csv
 verification/confined_compression/jobs/

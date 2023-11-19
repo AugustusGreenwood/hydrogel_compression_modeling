@@ -112,3 +112,17 @@ end
 function _std_dev_scaling(row::AbstractVector)::Vector{Float64}
     return row ./ std(row)
 end
+
+function _0_to_1_scaling(ind_row::AbstractVector, whole_row::AbstractVector)::Vector{Float64}
+    min, max = minimum(whole_row), maximum(whole_row)
+    return @. (ind_row - min) / (max - min)
+end
+
+function _neg1_to_1_scaling(ind_row::AbstractVector, whole_row::AbstractVector)::Vector{Float64}
+    min, max = minimum(whole_row), maximum(whole_row)
+    return @. 2 * (ind_row - min) / (max - min) - 1
+end
+
+function _std_dev_scaling(ind_row::AbstractVector, whole_row::AbstractVector)::Vector{Float64}
+    return ind_row ./ std(whole_row)
+end
